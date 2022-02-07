@@ -5,6 +5,7 @@ class EmployeesController < ApplicationController
 	end
 
 	def new
+    @action = 'new'
 		@employee = Employee.new()
 	end
 
@@ -50,7 +51,7 @@ class EmployeesController < ApplicationController
   #   @user = User.find(params[:id])
   #   @user.destroy ? @user.update(deleted_account = false) : @user.update(deleted_account = true)
   # end
-  
+
   private
   def employee_params
   	params.require(:employee).permit(:first_name, :last_name, :email, :phone, :address, :salary, :gender, :join_date, :password, :designation, :active, :department_id, :file)

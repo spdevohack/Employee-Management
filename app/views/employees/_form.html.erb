@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-center align-item-center">
   
+
     <%= form_with  class: "form", model: @employee, url: @action == 'edit' ? employee_path : employees_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
       <%= form.label :first_name,  "First Name:" %><br>
       <%= form.text_field :first_name, class:'form-control input'%><br>
@@ -31,7 +32,7 @@
 
 
       <input id="submit-btn" type="submit" value="Submit" name= 'submit' ></input>  
-
     <% end %>
+    
 
 </div>

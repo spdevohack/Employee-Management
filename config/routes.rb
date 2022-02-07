@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'projects/index'
+  get 'projects/new'
+  get 'projects/edit'
+  get 'projects/show'
   devise_for :employees
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -7,4 +11,5 @@ Rails.application.routes.draw do
   post 'checkin', to: 'attandences#checkin'
   resources :employees
   resources :departments
+  resources :projects
 end

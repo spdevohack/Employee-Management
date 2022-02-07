@@ -2,6 +2,8 @@ class Employee < ApplicationRecord
 
   belongs_to :department
   has_many :attandences
+  has_many :assignedproject, dependent: :destroy
+  has_many :projects, through: :assignedproject
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -24,9 +26,9 @@ class Employee < ApplicationRecord
     "Sorry, this account has been deactivated."
   end
 
-  # def inactive_message   
-  #   !active ? super : :deleted_account  
-  # end  
+  def full_name
+    "#{first_name} #{last_name}"
+  end 
   
 
   def self.search(search)
@@ -37,7 +39,5 @@ class Employee < ApplicationRecord
       all
     end
   end  
-
-   
-         
+       
 end

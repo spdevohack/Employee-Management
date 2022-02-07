@@ -1,0 +1,40 @@
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S No.</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Employees</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @count = 0 %>
+    <% @projects.each do |project|%>
+        <% @count = @count +1 %>
+        <tr>
+          <th scope="row"><%= @count%></th>
+          <td><%= project.title%></td>
+          <td><%= project.description %></td>
+          <td><%= project.employees.select("first_name")%></td>
+          <td class="d-flex">
+            <%= button_to 'Edit', edit_project_path(project), method: :get, class:'btn btn-success' %>
+            <%= button_to 'Delete', project_path(project), method: :delete, class:'btn btn-primary', id:"delete-btn" %>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center align-item-center">
+  <%= link_to 'Add Project', new_project_path, method: :get, class:"btn btn-primary"%>
+</div>
+<script>
+  button = document.getElementById("delete-btn");
+  button.addEventListener('click', function(e) {
+    if(confirm('Are you Sure?')){
+    }else {
+      e.preventDefault();
+    }
+  })
+</script>

@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_113826) do
+ActiveRecord::Schema.define(version: 2022_02_07_173411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignedprojects", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_assignedprojects_on_employee_id"
+    t.index ["project_id"], name: "index_assignedprojects_on_project_id"
+  end
 
   create_table "attandences", force: :cascade do |t|
     t.datetime "check_in", precision: 6
@@ -54,4 +63,13 @@ ActiveRecord::Schema.define(version: 2022_02_07_113826) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "assignedprojects", "employees"
+  add_foreign_key "assignedprojects", "projects"
 end

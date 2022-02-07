@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-center align-item-center">
+    <%= form_with  class: "form", model: @project, url: @action == 'edit' ? project_path : projects_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %><br>
+      <%= form.label :description %><br>
+      <%= form.text_area :description %><br>
+      <%= form.collection_check_boxes :employee_ids, Employee.all, :id, :full_name, { hide_label: true } %><br>
+      <input id="submit-btn" type="submit" value="Submit" name= 'submit' ></input>  
+    <% end %>
+</div>
+
+
+
