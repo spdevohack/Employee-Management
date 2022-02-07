@@ -1,40 +1,41 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <% if employee_signed_in? %>
+      <% if employee_signed_in? && current_employee.is_admin == true %>
+        <li class="nav-item">
+          <%= link_to 'Department', departments_path, method: :get, class:"nav-link text-dark"%>
+        </li> 
+        <li class="nav-item">
+          <%= link_to 'All Employees', employees_path, method: :get, class:"nav-link text-dark"%>
+        </li> 
 
-      <li class="nav-item">
+        <li class="nav-item">
           <%= link_to 'Add Employee', new_employee_path, method: :get, class:"nav-link text-dark"%>
-      </li>
-
-      <li class="nav-item">
-          <%= link_to 'Edit Employee', edit_employee_path(current_employee[:id]), method: :get, class:"nav-link text-dark"%>
-      </li> 
-
-      <li class="nav-item">
+        </li>
+      <% end %>
+      <% if employee_signed_in?  %>
+        <li class="nav-item">
           <%= link_to 'Profile', employee_path(current_employee[:id]), method: :get, class:"nav-link text-dark"%>
-      </li> 
+        </li> 
 
-      <li class="nav-item">
+        <li class="nav-item">
           <%= link_to 'Sign Out', destroy_employee_session_path, class:"nav-link text-dark"%>
-      </li>
+        </li>
       <% else %>  
-      
         <li class="nav-item">
           <%= link_to 'Sign In', new_employee_session_path, class:"nav-link text-dark"%>
         </li>
-
       <% end %>   
       </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <%= form_with url: employees_path, method: :get do |form| %>
+        <%= form.text_field :search %>
+        <%= form.submit "Search" %>
+    <% end %>
   </div>
 </nav>

@@ -1,7 +1,8 @@
 <table class="table">
   <thead>
+  <% if (employee_signed_in? && current_employee.is_admin?) %>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">S No.</th>
       <th scope="col">Employee ID</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
@@ -15,12 +16,12 @@
       <th scope="col">Joining Date</th>
       <th scope="col">Admin</th>
       <th scope="col">Department</th>
-      <th scope="col">Active</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <% @count = 0 %>
+    
     <% @employees.each do |employee|%>
       <% if employee.is_admin != true %>
         <% @count = @count +1 %>
@@ -36,20 +37,20 @@
           <td><%= employee.address %></td>
           <td><%= employee.designation %></td>
           <td><%= employee.active %></td>
-          <td><%= employee.Join_date %></td>
+          <td><%= employee.created_at %></td>
           <td><%= employee.is_admin %></td>
-          <td><%= employee.department %></td>
+          <td><%= employee.department.name %></td>
           <td class="d-flex">
-            <%= button_to 'Details', employee_path(employee), method: :get, class:'btn btn-info' %>
             <%= button_to 'Edit', edit_employee_path(employee), method: :get, class:'btn btn-success' %>
             <%= button_to 'Delete', employee_path(employee), method: :delete, class:'btn btn-primary', id:"delete-btn" %>
           </td>
         </tr>
       <% end%>
+     <% end %>
+
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Add Employee', new_employee_path, method: :get %>
 <script>
   button = document.getElementById("delete-btn");
   button.addEventListener('click', function(e) {

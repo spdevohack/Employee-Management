@@ -1,4 +1,5 @@
 <div class="d-flex justify-content-center align-item-center">
+  
     <%= form_with  class: "form", model: @employee, url: @action == 'edit' ? employee_path : employees_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
       <%= form.label :first_name,  "First Name:" %><br>
       <%= form.text_field :first_name, class:'form-control input'%><br>
@@ -20,7 +21,9 @@
     	<%= form.label :gender_other, "Other" %>
     	<br>
     	<%= form.label :designation %>
-    	<%= form.select :designation, ['manager','team_leader','team_member']%><br>
+    	<%= form.select :designation, ['manager','team_leader','team_member', 'staff']%><br>
+      <%= form.label :department_id%>
+      <%= form.select :department_id, Department.all.collect{|d| [d.name, d.id]} %><br>
       <%= form.label :email, "Email:" %><br>
       <%= form.text_field :email , class:'form-control input'%><br>
     	<%= form.label :password, "Password:" %><br>
@@ -30,4 +33,5 @@
       <input id="submit-btn" type="submit" value="Submit" name= 'submit' ></input>  
 
     <% end %>
+
 </div>

@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_04_113754) do
+ActiveRecord::Schema.define(version: 2022_02_07_065731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "employees", force: :cascade do |t|
     t.string "first_name"
@@ -21,12 +27,10 @@ ActiveRecord::Schema.define(version: 2022_02_04_113754) do
     t.integer "salary"
     t.string "gender"
     t.string "phone"
-    t.date "Join_date"
     t.text "address"
     t.integer "designation"
     t.boolean "active", default: true
     t.boolean "is_admin", default: false
-    t.integer "department"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -34,6 +38,8 @@ ActiveRecord::Schema.define(version: 2022_02_04_113754) do
     t.datetime "remember_created_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end

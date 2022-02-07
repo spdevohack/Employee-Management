@@ -1,1 +1,27 @@
-<%= render 'form' %>
+
+<% if employee_signed_in?  && current_employee.is_admin == true%>
+	<%= render 'form' %>
+<% else %>
+<div class="d-flex justify-content-center align-item-center">
+
+	<%= form_with  class: "form", model: @employee, url: @action == 'edit' ? employee_path : employees_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
+      <%= form.label :first_name,  "First Name:" %><br>
+      <%= form.text_field :first_name, class:'form-control input'%><br>
+      <%= form.label :last_name, "Last Name:" %><br>
+      <%= form.text_field :last_name , class:'form-control input'%><br>
+      <%= form.label :phone, "Contact NO:" %><br>
+      <%= form.text_field :phone , class:'form-control input'%><br>
+      <%= form.label :address, "Address:" %><br>
+      <%= form.text_field :address , class:'form-control input'%><br>
+      <%= form.label :salary, "Salary:" %><br>
+      <%= form.text_field :salary , class:'form-control input'%><br>
+      <%= form.label :email, "Email:" %><br>
+      <%= form.text_field :email , class:'form-control input'%><br>
+    	<%= form.label :password, "Password:" %><br>
+      <%= form.password_field :password , class:'form-control input'%><br>
+
+      <input id="submit-btn" type="submit" value="Submit" name= 'submit' ></input>  
+    <% end %>
+ </div>
+<% end %>    
+

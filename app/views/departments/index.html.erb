@@ -1,0 +1,36 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S No.</th>
+      <th scope="col">Department ID</th>
+      <th scope="col">Department Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @count = 0 %>
+    	<% @departments.each do |department|%>
+       <% @count = @count +1 %>
+        <tr>
+          <th scope="row"><%= @count%></th>
+          <td><%= department.id %></td>
+          <td><%= department.name%></td>
+          <td class="d-flex">
+            <%= button_to 'Edit', edit_department_path(department), method: :get, class:'btn btn-success' %>
+            <%= button_to 'Delete', department_path(department), method: :delete, class:'btn btn-primary', id:"delete-btn" %>
+          </td>
+        </tr>
+      <% end%>
+  </tbody>
+</table>
+<%= link_to 'Add Department', new_department_path, class: 'btn btn-primary'%>
+
+<script>
+  button = document.getElementById("delete-btn");
+  button.addEventListener('click', function(e) {
+    if(confirm('Are you Sure?')){
+    }else {
+      e.preventDefault();
+    }
+  })
+</script>

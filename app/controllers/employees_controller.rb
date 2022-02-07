@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
+  before_action :authenticate_employee!, only: [:index]
 	def index
-		@employees = Employee.all.order(:id)	
+		@employees = Employee.search(params[:search])
 	end
 
 	def new
@@ -15,7 +16,7 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(employee_params) #link every employee with user 
     if @employee.save!
-      redirect_to root_path
+      redirect_to employees_path
       # PostSendMail.new(@employee).send_mail      #Using services for Sending mail 
     else
       render 'new'
@@ -31,7 +32,7 @@ class EmployeesController < ApplicationController
   def update
     @employee = Employee.find(params[:id])
     if @employee.update(employee_params)
-      redirect_to employees_index_path(@employee), notice: "employee was successfully updated"
+      redirect_to employees_path, notice: "employee was successfully updated"
     else
       render "edit"
     end
@@ -39,8 +40,9 @@ class EmployeesController < ApplicationController
 
   def destroy
     @employee = Employee.find(params[:id])
-    @employee.destroy
-    redirect_to employees_index_path, notice: "employee was successfully deleted"
+     if @employee.update(active: false) 
+        redirect_to employees_path, notice: "employee was successfully deleted"
+    end
   end
 
   private
