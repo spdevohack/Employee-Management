@@ -1,11 +1,24 @@
-Name: <%= @employee.first_name %> <br>
-Phone_no: <%= @employee.phone %> <br>
-Email ID: <%= @employee.email %><br>
-DepartMent: <%= @employee.department.name%><br>
-
+<div class="d-flex justify-content-center align-item-center">
+	<div>
+		<strong>Name:</strong> <%= @employee.first_name %> <br>
+		<strong>Phone_no:</strong> <%= @employee.phone %> <br>
+		<strong>Email ID:</strong> <%= @employee.email %><br>
+		<strong>DepartMent:</strong> <%= @employee.department.name%><br>
+	</div>
+	<div>
+		<% if @employee.file.url.present?%>
+			<strong> profile Pic: </strong><br><br>
+			<%= image_tag @employee.file.url %>	
+		<% end %>	
+	</div>
+</div>
+<br>
  
-<%= link_to 'Edit Profile', edit_employee_path(current_employee[:id]), method: :get, class:"btn btn-success"%>
-<%= link_to 'Back', employees_path, class:"btn btn-primary"%>
+<div class="d-flex justify-content-center align-item-center">
+	<%= link_to 'Edit Profile', edit_employee_path(current_employee[:id]), method: :get, class:"btn btn-success"%>
+	<br>
+	<%= link_to 'Back', employees_path, class:"btn btn-primary"%>
+</div>
 
 
 

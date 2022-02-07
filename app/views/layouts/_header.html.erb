@@ -9,6 +9,9 @@
    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <% if employee_signed_in? && current_employee.is_admin == true %>
         <li class="nav-item">
+          <%= link_to 'Devohack', root_path,class:"nav-link text-dark" %>
+        </li>
+        <li class="nav-item">
           <%= link_to 'Department', departments_path, method: :get, class:"nav-link text-dark"%>
         </li> 
         <li class="nav-item">
@@ -20,6 +23,10 @@
         </li>
       <% end %>
       <% if employee_signed_in?  %>
+        <li class="nav-item">
+           <%= link_to 'Devohack', root_path,class:"nav-link text-dark" %>
+        </li>
+
         <li class="nav-item">
           <%= link_to 'Profile', employee_path(current_employee[:id]), method: :get, class:"nav-link text-dark"%>
         </li> 

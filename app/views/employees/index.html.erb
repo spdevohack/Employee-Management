@@ -21,7 +21,6 @@
   </thead>
   <tbody>
     <% @count = 0 %>
-    
     <% @employees.each do |employee|%>
       <% if employee.is_admin != true %>
         <% @count = @count +1 %>

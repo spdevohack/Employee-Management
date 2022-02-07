@@ -1,0 +1,2 @@
+class Attandence < ApplicationRecord
+end

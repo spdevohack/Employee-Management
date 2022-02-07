@@ -8,6 +8,24 @@ class Employee < ApplicationRecord
          :recoverable, :rememberable
 
   enum designation: {manager: 0, team_leader: 1, team_member: 2, staff: 3}
+
+  mount_uploader :file, FileUploader
+
+  # def soft_delete  
+  #   update_attribute(:active, false)  
+  # end  
+
+  def active_for_authentication?
+    super && self.active == true
+  end
+
+  def inactive_message
+    "Sorry, this account has been deactivated."
+  end
+
+  # def inactive_message   
+  #   !active ? super : :deleted_account  
+  # end  
   
 
   def self.search(search)
