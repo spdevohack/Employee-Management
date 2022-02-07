@@ -1,6 +1,7 @@
 class Employee < ApplicationRecord
 
   belongs_to :department
+  has_many :attandences
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
