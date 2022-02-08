@@ -1,6 +1,6 @@
 class DepartmentsController < ApplicationController
 	def index
-		@departments = Department.all.order(:id)
+		@departments = Department.all.order(:name)
 		# @departments = Department.search(params[:search])
 
 	end

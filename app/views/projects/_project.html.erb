@@ -1,13 +1,58 @@
 <div class="d-flex justify-content-center align-item-center">
-    <%= form_with  class: "form", model: @project, url: @action == 'edit' ? project_path : projects_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
+    <%= form_with  id: "myForm", model: @project, url: @action == 'edit' ? project_path : projects_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
       <%= form.label :title %><br>
-      <%= form.text_field :title %><br>
+      <%= form.text_field :title, class:'form-control input'%><br>
       <%= form.label :description %><br>
-      <%= form.text_area :description %><br>
-      <%= form.collection_check_boxes :employee_ids, Employee.where(is_admin: false), :id, :full_name, { hide_label: true } %><br>
-      <input id="submit-btn" type="submit" value="Submit"></input>  
+      <%= form.text_area :description, class:'form-control input' %><br>
+   
+      <%= form.collection_check_boxes :employee_ids, Employee.where(is_admin: false, active: true), :id, :full_name, { hide_label: true } %><br> 
+     
+      <input id="submitbtn" type="button" value="Save"  ></input> 
     <% end %>
 </div>
 
+<script type="text/javascript">
+
+  var regTitle = /^[a-zA-Z0-9\s]{5,}$/
+  var regDesc = /^[a-zA-Z0-9\s]{20,}$/
+  var inputArray = document.querySelectorAll(".input");
+  var form  =document.getElementById("myForm");
+  var regArray = [regTitle, regDesc];
+  var alertArray = ["Title must be greater than 5 words", "Description must be greater than 20 words"];  
+  var blankError = ["title must be present", "Description must be present"]
+  var array = [];
+  var submitBtn = document.querySelector("#submitbtn");
+  submitBtn.addEventListener("click", validation);
+  function validation(e) {
+      errorAlert = []
+      blankErrorAlert = []
+      for (var i = 0; i < inputArray.length; i++) {
+          array.push(inputArray[i].value);
+          console.log(array);
+          if (!regArray[i].test(array[i]) && array[i] != "") {
+              errorAlert.push(alertArray[i]);
+              alert(errorAlert);
+              array.length= 0;
+              break;
+          } else if (array[i] == "") {
+              blankErrorAlert.push(blankError[i])
+              alert(blankErrorAlert);
+              array.length= 0;   
+              break;
+          }          
+    }
+
+    if (errorAlert.legth > 0 || blankErrorAlert.length > 0){
+            e.preventDefault()
+            return false
+          }
+    else{
+        console.log("form submit in else")
+        form.submit();  
+      }
+  }
+
+
+</script>
 
 

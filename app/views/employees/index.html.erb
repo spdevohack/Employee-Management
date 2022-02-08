@@ -41,8 +41,7 @@
           <td><%= employee.created_at %></td>
           <td><%= employee.is_admin %></td>
           <td><%= employee.department.name %></td>
-          <td><%= employee.projects.ids %></td>
-
+          <td><%= employee.projects.pluck(:title)%></td>
           <td class="d-flex">
             <%= button_to 'Edit', edit_employee_path(employee), method: :get, class:'btn btn-success' %>
             <%= button_to 'Delete', employee_path(employee), method: :delete, class:'btn btn-primary delete-btn' %>

@@ -16,8 +16,8 @@
         <tr>
           <th scope="row"><%= @count%></th>
           <td><%= project.title%></td>
-          <td><%= project.description %></td>
-          <td><%= project.employees.ids %></td>
+          <td><%= project.description %></td>  
+          <td><%= project.employees.pluck(:first_name) if project.employees.present? %></td>       
           <td class="d-flex">
             <%= button_to 'Edit', edit_project_path(project), method: :get, class:'btn btn-success' %>
             <%= button_to 'Delete', project_path(project), method: :delete, class:'btn btn-primary delete-btn' %>

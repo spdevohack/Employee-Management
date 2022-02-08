@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center align-item-center">
   
 
-    <%= form_with  class: "form", model: @employee, url: @action == 'edit' ? employee_path : employees_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
+    <%= form_with   model: @employee, url: @action == 'edit' ? employee_path : employees_path, method: @action == 'edit' ? :PATCH : :POST, id: "my-form" do |form| %>
       <%= form.label :first_name,  "First Name:" %><br>
       <%= form.text_field :first_name, class:'form-control input'%><br>
       <%= form.label :last_name, "Last Name:" %><br>
@@ -22,17 +22,71 @@
     	<%= form.label :gender_other, "Other" %>
     	<br>
     	<%= form.label :designation %>
-    	<%= form.select :designation, ['manager','team_leader','team_member', 'staff']%><br>
+    	<%= form.select :designation, ['manager','team_leader','team_member', 'staff'], {prompt: "Select Designation"}%><br>
       <%= form.label :department_id%>
-      <%= form.select :department_id, Department.all.collect{|d| [d.name, d.id]} %><br>
+      <%= form.select :department_id, Department.all.collect{|d| [d.name, d.id]}, {prompt: "Select Department"}%><br>
       <%= form.label :email, "Email:" %><br>
       <%= form.text_field :email , class:'form-control input'%><br>
     	<%= form.label :password, "Password:" %><br>
       <%= form.password_field :password , class:'form-control input'%><br>
-
-
-      <input id="submit-btn" type="submit" value="Submit" name= 'submit' ></input>  
+      <input id="submitbtn" type="button" value="Save"  ></input>  
     <% end %>
     
-
 </div>
+
+
+<script type="text/javascript">
+
+  var regName = /^[a-zA-Z\s]{3,}$/
+  var regLastName = /^[a-zA-Z\s]{3,}$/
+  var regPhone = /^[0-9]{10}$/
+  var regEmail = /^[A-Za-z0-9]+(\.[A-Za-z0-9]+)?@[A-z]+\.(com|org|in)?$/
+  var regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/
+  var regAddress = /^(.){10,}$/
+  var regSalary = /^[0-9]+$/
+
+
+
+  var inputArray = document.querySelectorAll(".input");
+  var form  =document.getElementById("my-form");
+
+
+  
+  var regArray = [regName, regLastName, regPhone, regAddress, regSalary, regEmail, regPassword];
+  var alertArray = ["name must be character and minimum of 3 length", "last name must be character and minimum of 3 length", "enter valid phone number",  "Address must   contain more than 15 words", "only digits are allowed", "Enter valid email", "password must be greater than 6 character, conatin onespecial symbol and one number"];  
+  
+  var blankError = ["first name must be enter", "last name must be enter", "Enter valid phone Number","Enter Address","Enter salary","Enter email address", "Enter Password"]
+  
+  var array = [];
+  
+  var submitBtn = document.querySelector("#submitbtn");
+  submitBtn.addEventListener("click", validation);
+  function validation(e) {
+      errorAlert = []
+      blankErrorAlert = []
+      for (var i = 0; i < inputArray.length; i++) {
+          array.push(inputArray[i].value);
+          console.log(array);
+          if (!regArray[i].test(array[i]) && array[i] != "") {
+              errorAlert.push(alertArray[i]);
+              alert(errorAlert);
+              array.length= 0;
+              break;
+          } else if (array[i] == "") {
+              blankErrorAlert.push(blankError[i])
+              alert(blankErrorAlert);
+              array.length= 0;   
+              break;
+          }          
+    }
+
+    if (errorAlert.legth > 0 || blankErrorAlert.length > 0){
+            e.preventDefault()
+            return false
+          }
+    else{
+        console.log("form submit in else")
+        form.submit();  
+      }
+  }
+</script>
