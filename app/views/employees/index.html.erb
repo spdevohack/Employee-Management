@@ -17,7 +17,9 @@
       <th scope="col">Admin</th>
       <th scope="col">Department</th>
       <th scope="col">Project</th>
-
+      <th scope="col">Current Sign At</th>
+      <th scope="col">Last Sign At</th>
+      <th scope="col">Total Sign In</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -42,9 +44,13 @@
           <td><%= employee.is_admin %></td>
           <td><%= employee.department.name %></td>
           <td><%= employee.projects.pluck(:title)%></td>
+          <td><%= employee.current_sign_in_at%></td>
+          <td><%= employee.last_sign_in_at%></td>
+          <td><%= employee.sign_in_count%></td>
           <td class="d-flex">
+            <%= button_to 'Details',employee_path(employee), method: :get, class:'btn btn-primary' %>
             <%= button_to 'Edit', edit_employee_path(employee), method: :get, class:'btn btn-success' %>
-            <%= button_to 'Delete', employee_path(employee), method: :delete, class:'btn btn-primary delete-btn' %>
+            <%= button_to 'Delete', employee_path(employee), method: :delete, class:'btn btn-danger delete-btn' %>
           </td>
         </tr>
       <% end%>

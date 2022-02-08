@@ -6,7 +6,7 @@ class Employee < ApplicationRecord
   has_many :projects, through: :assignedproject
 
   devise :database_authenticatable,
-         :recoverable, :rememberable
+         :recoverable, :rememberable, :trackable
 
   enum designation: {manager: 0, team_leader: 1, team_member: 2, staff: 3}
   mount_uploader :file, FileUploader

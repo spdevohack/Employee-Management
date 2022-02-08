@@ -32,9 +32,13 @@ class EmployeesController < ApplicationController
 
   def update
     @employee = Employee.find(params[:id])
-    if @employee.update(employee_params) && @employee.is_admin?
+    if @employee.present? && @employee.is_admin?
+      @employee.update(employee_params)
+      sign_in(@employee, :bypass => true)
       redirect_to employees_path, notice: "employee was successfully updated"
-    elsif @employee.update(employee_params) && @employee.is_admin == false 
+    elsif @employee.present? && @employee.is_admin == false 
+      @employee.update(employee_params)
+      sign_in(@employee, :bypass => true)
       redirect_to employee_path, notice: "employee was successfully updated"
     else
       render "edit"
