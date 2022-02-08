@@ -17,16 +17,16 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @action = 'edit'
     @project = Project.find(params[:id])
+    render 'edit'
   end
 
   def update
     @project =Project.find(params[:id])
-    if @project.update(project_params)
+    @project.update(project_params)
       redirect_to projects_path
-    else
-      render 'edit' 
-    end  
+    
   end
 
   def show
@@ -41,6 +41,6 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:title, :description)
+    params.require(:project).permit(:title, :description, employee_ids: [])
   end
 end

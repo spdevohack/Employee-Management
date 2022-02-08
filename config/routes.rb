@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'projects/index'
   get 'projects/new'
-  get 'projects/edit'
+  # get 'projects/:id/edit'
   get 'projects/show'
   devise_for :employees
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

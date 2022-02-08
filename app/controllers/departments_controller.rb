@@ -2,7 +2,7 @@ class DepartmentsController < ApplicationController
 	def index
 		@departments = Department.all.order(:id)
 		# @departments = Department.search(params[:search])
-		
+
 	end
 
 	def new
@@ -15,10 +15,9 @@ class DepartmentsController < ApplicationController
   end
 
   def create
-    @department = Department.new(dept_params) #link every department with user 
+    @department = Department.new(dept_params) 
     if @department.save!
-      redirect_to department_path
-      # PostSendMail.new(@department).send_mail      #Using services for Sending mail 
+      redirect_to departments_path
     else
       render 'new'
     end

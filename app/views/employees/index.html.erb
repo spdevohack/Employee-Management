@@ -16,6 +16,8 @@
       <th scope="col">Joining Date</th>
       <th scope="col">Admin</th>
       <th scope="col">Department</th>
+      <th scope="col">Project</th>
+
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -39,9 +41,11 @@
           <td><%= employee.created_at %></td>
           <td><%= employee.is_admin %></td>
           <td><%= employee.department.name %></td>
+          <td><%= employee.projects.ids %></td>
+
           <td class="d-flex">
             <%= button_to 'Edit', edit_employee_path(employee), method: :get, class:'btn btn-success' %>
-            <%= button_to 'Delete', employee_path(employee), method: :delete, class:'btn btn-primary', id:"delete-btn" %>
+            <%= button_to 'Delete', employee_path(employee), method: :delete, class:'btn btn-primary delete-btn' %>
           </td>
         </tr>
       <% end%>
@@ -50,14 +54,18 @@
     <% end %>
   </tbody>
 </table>
+
 <script>
-  button = document.getElementById("delete-btn");
-  button.addEventListener('click', function(e) {
-    if(confirm('Are you Sure?')){
-    }else {
-      e.preventDefault();
-    }
-  })
+  button = document.querySelectorAll(".delete-btn")
+  for (var i = 0; i<= button.length; i++){
+
+    button[i].addEventListener('click', function(e) {
+      if(confirm('Are you Sure?')){
+      }else {
+        e.preventDefault();
+      }
+    })
+  }
 </script>
 
 
