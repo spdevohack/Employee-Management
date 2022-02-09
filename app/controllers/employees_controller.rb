@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_employee!, only: [:index]
-	def index
+	def index 
 		@employees = Employee.search(params[:search])
 	end
 
@@ -51,10 +51,13 @@ class EmployeesController < ApplicationController
         redirect_to employees_path, notice: "employee was successfully deleted"
     end
   end
-  # def destroy
-  #   @user = User.find(params[:id])
-  #   @user.destroy ? @user.update(deleted_account = false) : @user.update(deleted_account = true)
-  # end
+
+
+  def signin
+    if sign_in(@employee)
+      current_employee.update(attendance: 'present')
+    end
+  end
 
   private
   def employee_params

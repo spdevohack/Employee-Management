@@ -9,8 +9,9 @@
 		<% if @employee.projects.present? %>
 			<strong>Currently Handle Project:</strong> <%= @employee.projects.pluck(:title) if @employee.projects.present? %><br>
 		<% end %>
-		<strong>Current Sign At</strong> <%= @employee.current_sign_in_at%><br>
-		<strong>Last Sign At:</strong> <%= @employee.last_sign_in_at%><br>
+		<strong>Attendance:</strong><%= @employee.attendance if @employee.attendance.present? %><br>
+		<strong>Current Sign At</strong> <%= @employee.current_sign_in_at.getlocal%><br>
+		<strong>Last Sign At:</strong> <%= @employee.last_sign_in_at.getlocal%><br>
 		<strong>Current Sign In Ip:</strong> <%= @employee.current_sign_in_ip%><br>
 		<strong>Last Sign In Ip:</strong> <%= @employee.last_sign_in_ip%><br>
 		<strong>Sign In Count:</strong> <%= @employee.sign_in_count%><br>

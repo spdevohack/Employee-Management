@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :find_project, only: [ :team ]
+
   def index
     @projects = Project.all
   end
@@ -31,6 +33,8 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    # @employees = Employee.where(active: true)
+
   end
 
   def destroy
@@ -39,8 +43,27 @@ class ProjectsController < ApplicationController
       redirect_to projects_path   
   end
 
+  def team
+    @employees = Employee.where(active: true) 
+  end
+
+  def add
+    @employee = Employee.find(params[:id]) 
+    @project = Project.find(params[:project_id])
+    # debugger
+    @project.employees << (@employee)
+  end
+
+  def remove
+  end
+
+
   private
+  def find_project
+    @project  = Project.find(params[:id])
+  end
+
   def project_params
-    params.require(:project).permit(:title, :description, employee_ids: [])
+    params.require(:project).permit(:title, :description, :employee_ids )
   end
 end

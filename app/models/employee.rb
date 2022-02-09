@@ -9,6 +9,7 @@ class Employee < ApplicationRecord
          :recoverable, :rememberable, :trackable
 
   enum designation: {manager: 0, team_leader: 1, team_member: 2, staff: 3}
+  enum attendance: {present: 0, absent: 1}
   mount_uploader :file, FileUploader
  
   #validation for user

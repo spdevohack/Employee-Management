@@ -19,6 +19,7 @@
           <td><%= project.description %></td>  
           <td><%= project.employees.pluck(:first_name) if project.employees.present? %></td>       
           <td class="d-flex">
+						<%= link_to "Create Team", team_path(project) %>
             <%= button_to 'Edit', edit_project_path(project), method: :get, class:'btn btn-success' %>
             <%= button_to 'Delete', project_path(project), method: :delete, class:'btn btn-primary delete-btn' %>
           </td>
@@ -30,6 +31,7 @@
 <div class="d-flex justify-content-center align-item-center">
   <%= link_to 'Add Project', new_project_path, method: :get, class:"btn btn-primary"%>
 </div>
+
 
 <script>
   button = document.querySelectorAll(".delete-btn")
