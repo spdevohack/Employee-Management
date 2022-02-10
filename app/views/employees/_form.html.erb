@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center align-item-center">
-  
 
     <%= form_with   model: @employee, url: @action == 'edit' ? employee_path : employees_path, method: @action == 'edit' ? :PATCH : :POST, id: "my-form" do |form| %>
+ 
       <%= form.label :first_name,  "First Name:" %><br>
       <%= form.text_field :first_name, class:'form-control input'%><br>
       <%= form.label :last_name, "Last Name:" %><br>
@@ -27,10 +27,13 @@
       <%= form.select :department_id, Department.all.collect{|d| [d.name, d.id]}, {prompt: "Select Department"}%><br>
       <%= form.label :email, "Email:" %><br>
       <%= form.text_field :email , class:'form-control input'%><br>
-    	<%= form.label :password, "Password:" %><br>
-      <%= form.password_field :password , class:'form-control input'%><br>
+    
+    	  <%= form.label :password, "Password:" %><br>
+        <%= form.password_field :password , class:'form-control input'%><br>
+     
       <input id="submitbtn" type="button" value="Save"  ></input>  
     <% end %>
+
     
 </div>
 

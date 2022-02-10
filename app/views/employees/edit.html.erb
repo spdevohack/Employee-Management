@@ -1,7 +1,7 @@
 
 <% if employee_signed_in?  && current_employee.is_admin == true%>
 	<%= render 'form' %>
-<% else %>
+<% elsif employee_signed_in?  && current_employee.is_admin == false %>
 <div class="d-flex justify-content-center align-item-center">
 
 	<%= form_with  class: "form", model: @employee, url: @action == 'edit' ? employee_path : employees_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
@@ -18,10 +18,9 @@
       <%= form.label :salary, "Salary:" %><br>
       <%= form.text_field :salary , class:'form-control input'%><br>
       <%= form.label :email, "Email:" %><br>
-      <%= form.text_field :email , class:'form-control input'%><br>
+      <%= form.text_field :email , class:'form-control input', disabled: 'disabled'%><br>
     	<%= form.label :password, "Password:" %><br>
       <%= form.password_field :password , class:'form-control input'%><br>
-
       <input id="submit-btn" type="submit" value="Submit" name= 'submit' ></input>  
     <% end %>
  </div>

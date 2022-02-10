@@ -1,24 +1,33 @@
-<div class="d-flex justify-content-center align-item-center">
+<div class="d-flex justify-content-center align-item-center card" style="width: 18rem;">
 	<div>
-		<strong>Name:</strong> <%= @employee.first_name %> <br>
-		<strong>Phone_no:</strong> <%= @employee.phone %> <br>
-		<strong>Email ID:</strong> <%= @employee.email %><br>
-		<strong>DepartMent:</strong> <%= @employee.department.name%><br>
-	</div>
-	<div>
+		<div>
 		<% if @employee.file.url.present?%>
 			<strong> profile Pic: </strong><br><br>
 			<%= image_tag @employee.file.url %>	
 		<% end %>	
+		</div>
+		<strong>Name:</strong> <%= full_name(@employee) %> <br>
+		<strong>Phone_no:</strong> <%= @employee.phone %> <br>
+		<strong>Email ID:</strong> <%= @employee.email %><br>
+		<strong>DepartMent:</strong> <%= @employee.department.name%><br>
+		<% if @employee.projects.present? %>
+			<strong>Currently Handle Project:</strong> <%= @employee.projects.pluck(:title) if @employee.projects.present? %><br>
+		<% end %>
+		<strong>Attendance:</strong><%= @employee.attendance if @employee.attendance.present? %><br>
+		<strong>Current Sign At</strong> <%= @employee.current_sign_in_at %><br>
+		<strong>Last Sign At:</strong> <%= @employee.last_sign_in_at %><br>
+		<strong>Sign In Count:</strong> <%= @employee.sign_in_count%><br><br>
+
+		<div class="d-flex justify-content-center align-item-center">
+			<%= link_to 'Edit Profile', edit_employee_path(@employee), method: :get, class:"btn btn-success"%>
+			<%= link_to 'Back', employees_path, class:"btn btn-primary" if current_employee.is_admin? %>
+		</div>
 	</div>
 </div>
-<br>
+
+
+
  
-<div class="d-flex justify-content-center align-item-center">
-	<%= link_to 'Edit Profile', edit_employee_path(current_employee[:id]), method: :get, class:"btn btn-success"%>
-	<br>
-	<%= link_to 'Back', employees_path, class:"btn btn-primary"%>
-</div>
 
 
 

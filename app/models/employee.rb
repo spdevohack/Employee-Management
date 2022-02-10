@@ -6,9 +6,10 @@ class Employee < ApplicationRecord
   has_many :projects, through: :assignedproject
 
   devise :database_authenticatable,
-         :recoverable, :rememberable
+         :recoverable, :rememberable, :trackable
 
   enum designation: {manager: 0, team_leader: 1, team_member: 2, staff: 3}
+  enum attendance: {present: 0, absent: 1}
   mount_uploader :file, FileUploader
  
   #validation for user
@@ -24,6 +25,8 @@ class Employee < ApplicationRecord
 
   def active_for_authentication?
     super && self.active == true
+    # super &&  self.active
+
   end
 
   def inactive_message
@@ -33,6 +36,7 @@ class Employee < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end 
+
   
 
   def self.search(search)

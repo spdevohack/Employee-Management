@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_employee!, only: [:index]
-	def index
+	def index 
 		@employees = Employee.search(params[:search])
 	end
 
@@ -17,7 +17,7 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(employee_params) #link every employee with user 
     if @employee.save!
-      redirect_to employees_path
+      redirect_to employees_path, notice: "#{@employee.first_name} successfully Added"
       # PostSendMail.new(@employee).send_mail      #Using services for Sending mail 
     else
       render 'new'
@@ -32,10 +32,14 @@ class EmployeesController < ApplicationController
 
   def update
     @employee = Employee.find(params[:id])
-    if @employee.update(employee_params) && @employee.is_admin?
-      redirect_to employees_path, notice: "employee was successfully updated"
-    elsif @employee.update(employee_params) && @employee.is_admin == false 
-      redirect_to employee_path, notice: "employee was successfully updated"
+    if @employee.is_admin?
+      @employee.update!(employee_params)
+      sign_in(@employee, :bypass => true)
+      redirect_to employees_path, notice: "Employee Details successfully updated"
+    elsif  @employee.is_admin == false 
+      @employee.update!(employee_params)
+      sign_in(@employee, :bypass => true)
+      redirect_to employee_path, notice: "Profile successfully updated"
     else
       render "edit"
     end
@@ -44,13 +48,16 @@ class EmployeesController < ApplicationController
   def destroy
     @employee = Employee.find(params[:id])
      if @employee.update(active: false) && @employee.projects.destroy_all
-        redirect_to employees_path, notice: "employee was successfully deleted"
+        redirect_to employees_path, notice: "#{@employee.first_name} was successfully deleted"
     end
   end
-  # def destroy
-  #   @user = User.find(params[:id])
-  #   @user.destroy ? @user.update(deleted_account = false) : @user.update(deleted_account = true)
-  # end
+
+
+  def signin
+    if sign_in(@employee)
+      current_employee.update(attendance: 'present')
+    end
+  end
 
   private
   def employee_params
