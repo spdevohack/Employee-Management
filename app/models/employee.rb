@@ -25,6 +25,8 @@ class Employee < ApplicationRecord
 
   def active_for_authentication?
     super && self.active == true
+    # super &&  self.active
+
   end
 
   def inactive_message
@@ -34,6 +36,7 @@ class Employee < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end 
+
   
 
   def self.search(search)

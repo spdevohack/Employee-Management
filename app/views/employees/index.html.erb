@@ -44,8 +44,8 @@
           <td><%= employee.is_admin %></td>
           <td><%= employee.department.name %></td>
           <td><%= employee.projects.pluck(:title)%></td>
-          <td><%= employee.current_sign_in_at%></td>
-          <td><%= employee.last_sign_in_at%></td>
+          <td><%= employee.current_sign_in_at.localtime if employee.current_sign_in_at.present? %></td>
+          <td><%= employee.last_sign_in_at.localtime if employee.last_sign_in_at.present? %></td>
           <td><%= employee.sign_in_count%></td>
           <td class="d-flex">
             <%= button_to 'Details',employee_path(employee), method: :get, class:'btn btn-primary' %>

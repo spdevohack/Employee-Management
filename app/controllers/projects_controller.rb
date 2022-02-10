@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [ :team, :show ]
   before_action :find_employee, only: [ :add, :remove ]
 
+
   attr_accessor :employee, :project 
 
   def index
@@ -15,7 +16,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save!
-      redirect_to projects_path
+      redirect_to projects_path, notice: "New Project Created"
     else
       render 'new'
     end
@@ -30,7 +31,7 @@ class ProjectsController < ApplicationController
   def update
     @project =Project.find(params[:id])
     @project.update(project_params)
-      redirect_to projects_path
+      redirect_to projects_path, notice: "Project Updated!"
     
   end
 
@@ -43,24 +44,25 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-      redirect_to projects_path   
+    redirect_to projects_path, notice: "Project Deleted!!"   
   end
 
   def team
+    # @employees = Employee.projects.present?
     @employees = Employee.where(active: true) 
+
   end
 
   def add
-    @employee = Employee.find(params[:id]) 
+    # @employee = Employee.find(params[:id]) 
     @project = Project.find(params[:project_id])
-    # debugger
     @project.employees << (@employee)
+    redirect_to team_path,notice: "#{@employee.first_name} is Assigned to Project:#{@project.title} "
+    
   end
 
   def remove
-    # @employee = Employee.find(params[:id]) 
     @project = Project.find(params[:project_id]) 
-    # debugger
     @project.employees.find(@employee.id).destroy
   end
 

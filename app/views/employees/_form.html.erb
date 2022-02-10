@@ -27,10 +27,10 @@
       <%= form.select :department_id, Department.all.collect{|d| [d.name, d.id]}, {prompt: "Select Department"}%><br>
       <%= form.label :email, "Email:" %><br>
       <%= form.text_field :email , class:'form-control input'%><br>
-      <% unless @action == 'edit' and current_employee.is_admin? %>
+    
     	  <%= form.label :password, "Password:" %><br>
         <%= form.password_field :password , class:'form-control input'%><br>
-      <% end %>
+     
       <input id="submitbtn" type="button" value="Save"  ></input>  
     <% end %>
 

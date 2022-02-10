@@ -17,7 +17,7 @@ class DepartmentsController < ApplicationController
   def create
     @department = Department.new(dept_params) 
     if @department.save!
-      redirect_to departments_path
+      redirect_to departments_path, notice: "New Department successfully Introduced"
     else
       render 'new'
     end
@@ -32,7 +32,7 @@ class DepartmentsController < ApplicationController
   def update
     @department = Department.find(params[:id])
     if @department.update(dept_params)
-      redirect_to departments_path, notice: "department was successfully updated"
+      redirect_to departments_path, notice: "Department was successfully updated"
     else
       render "edit"
     end
@@ -41,7 +41,7 @@ class DepartmentsController < ApplicationController
   def destroy
     @department = Department.find(params[:id])
     @department.destroy 
-    redirect_to departments_path, notice: "department was successfully deleted"
+    redirect_to departments_path, notice: "Department was successfully deleted"
   end
 
   private

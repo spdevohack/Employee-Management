@@ -14,19 +14,17 @@
 			<strong>Currently Handle Project:</strong> <%= @employee.projects.pluck(:title) if @employee.projects.present? %><br>
 		<% end %>
 		<strong>Attendance:</strong><%= @employee.attendance if @employee.attendance.present? %><br>
-		<strong>Current Sign At</strong> <%= @employee.current_sign_in_at%><br>
-		<strong>Last Sign At:</strong> <%= @employee.last_sign_in_at%><br>
-		<strong>Current Sign In Ip:</strong> <%= @employee.current_sign_in_ip%><br>
-		<strong>Last Sign In Ip:</strong> <%= @employee.last_sign_in_ip%><br>
-		<strong>Sign In Count:</strong> <%= @employee.sign_in_count%><br>
+		<strong>Current Sign At</strong> <%= @employee.current_sign_in_at %><br>
+		<strong>Last Sign At:</strong> <%= @employee.last_sign_in_at %><br>
+		<strong>Sign In Count:</strong> <%= @employee.sign_in_count%><br><br>
 
 		<div class="d-flex justify-content-center align-item-center">
 			<%= link_to 'Edit Profile', edit_employee_path(@employee), method: :get, class:"btn btn-success"%>
-			<%= link_to 'Back', employees_path, class:"btn btn-primary"%>
+			<%= link_to 'Back', employees_path, class:"btn btn-primary" if current_employee.is_admin? %>
 		</div>
 	</div>
 </div>
-<br>
+
 
 
  
