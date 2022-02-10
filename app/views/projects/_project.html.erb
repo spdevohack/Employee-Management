@@ -4,9 +4,6 @@
       <%= form.text_field :title, class:'form-control input'%><br>
       <%= form.label :description %><br>
       <%= form.text_area :description, class:'form-control input' %><br>
-   
-      <%= form.collection_check_boxes :employee_ids, Employee.where(is_admin: false, active: true), :id, :full_name, { hide_label: true } %><br> 
-     
       <input id="submitbtn" type="button" value="Save"  ></input> 
     <% end %>
 </div>

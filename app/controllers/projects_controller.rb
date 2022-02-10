@@ -1,5 +1,8 @@
 class ProjectsController < ApplicationController
-  before_action :find_project, only: [ :team ]
+  before_action :find_project, only: [ :team, :show ]
+  before_action :find_employee, only: [ :add, :remove ]
+
+  attr_accessor :employee, :project 
 
   def index
     @projects = Project.all
@@ -32,7 +35,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    # @project = Project.find(params[:id])
     # @employees = Employee.where(active: true)
 
   end
@@ -55,12 +58,20 @@ class ProjectsController < ApplicationController
   end
 
   def remove
+    # @employee = Employee.find(params[:id]) 
+    @project = Project.find(params[:project_id]) 
+    # debugger
+    @project.employees.find(@employee.id).destroy
   end
 
 
   private
   def find_project
     @project  = Project.find(params[:id])
+  end
+
+  def find_employee
+    @employee = Employee.find(params[:id])
   end
 
   def project_params

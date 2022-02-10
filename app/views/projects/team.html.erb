@@ -19,8 +19,9 @@
           <td><%= employee.full_name%></td>
 
           <td class="d-flex">
-            <%= button_to 'Add', "#{ add_team_path(employee) }?project_id=#{ @project.id }", method: :post, class:'btn btn-primary' %>
-            <%= button_to 'remove', projects_remove_path, method: :get, class:'btn btn-success' %>         
+            <%= button_to 'Add', "#{ add_team_path(employee)}?project_id=#{ @project.id }", method: :post, class:'btn btn-primary' %>           
+            <%= button_to 'remove',"#{remove_member_path(employee)}?project_id=#{ @project.id }", method: :delete, class:'btn btn-success' %>   
+        
           </td>
         </tr>
       <% end%>

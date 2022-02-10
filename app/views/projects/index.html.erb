@@ -17,9 +17,9 @@
           <th scope="row"><%= @count%></th>
           <td><%= project.title%></td>
           <td><%= project.description %></td>  
-          <td><%= project.employees.pluck(:first_name) if project.employees.present? %></td>       
+          <td><%= project.employees.distinct.pluck(:first_name) if project.employees.present? %></td>       
           <td class="d-flex">
-						<%= link_to "Create Team", team_path(project) %>
+						<%= link_to "Create Team", team_path(project),class:'btn btn-dark'  %>
             <%= button_to 'Edit', edit_project_path(project), method: :get, class:'btn btn-success' %>
             <%= button_to 'Delete', project_path(project), method: :delete, class:'btn btn-primary delete-btn' %>
           </td>
