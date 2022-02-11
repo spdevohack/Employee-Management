@@ -27,3 +27,52 @@
 <% end %>
 
 <%= render "employees/shared/links" %>
+
+
+
+<!-- <script type="text/javascript">
+  var regEmail = /^[A-Za-z0-9]+(\.[A-Za-z0-9]+)?@[A-z]+\.(com|org|in)?$/
+  var regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/
+
+  var inputArray = document.querySelectorAll(".input");
+  var form  =document.getElementById("my-form");
+
+  var regArray = [regEmail, regPassword];
+  var alertArray = [ "Enter valid email", "password must be greater than 6 character, conatin onespecial symbol and one number"];  
+  
+  var blankError = ["Enter email address", "Enter Password"]
+  
+  var array = [];
+
+  var submitBtn = document.querySelector("#submitbtn");
+  submitBtn.addEventListener("click", validation);
+  function validation(e) {
+      errorAlert = []
+      blankErrorAlert = []
+      for (var i = 0; i < inputArray.length; i++) {
+          array.push(inputArray[i].value);
+          console.log(array);
+          if (!regArray[i].test(array[i]) && array[i] != "") {
+              errorAlert.push(alertArray[i]);
+              alert(errorAlert);
+              array.length= 0;
+              break;
+          } else if (array[i] == "") {
+              blankErrorAlert.push(blankError[i])
+              alert(blankErrorAlert);
+              array.length= 0;   
+              break;
+          }          
+    }
+
+    if (errorAlert.legth > 0 || blankErrorAlert.length > 0){
+            e.preventDefault()
+            return false
+          }
+    else{
+        console.log("form submit in else")
+        form.submit();  
+      }
+  }
+</script>
+ -->

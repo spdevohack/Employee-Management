@@ -18,7 +18,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params) #link every employee with user 
     if @employee.save!
       redirect_to employees_path, notice: "#{@employee.first_name} successfully Added"
-      # PostSendMail.new(@employee).send_mail      #Using services for Sending mail 
+      # skip_confirmation! 
     else
       render 'new'
     end

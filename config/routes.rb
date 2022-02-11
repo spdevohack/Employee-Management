@@ -13,9 +13,13 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
+  # get 'departments/designation' => "departments#designation"
   root "organizations#index"
   post 'checkin', to: 'attandences#checkin'
   resources :employees
   resources :departments
   resources :projects
+  resources :designations
+  get "designations/:id/new" => "designations#new", :as => "department_designation"
+
 end

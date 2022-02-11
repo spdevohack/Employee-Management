@@ -1,0 +1,8 @@
+<div class="d-flex justify-content-center align-item-center">
+    <%= form_with  id:"my-form", model: @designation, url: @action == 'edit' ? designation_path : designations_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
+      <%= form.label :name,  "Designation Name:" %><br>
+      <%= form.text_field :name, class:'form-control input'%><br>
+      <%=form.text_field :department_id , value: @department.id, type:'hidden' %>
+      <input id="submitbtn" type="submit"  name= 'Add' ></input>  
+    <% end %>
+</div>

@@ -7,11 +7,13 @@ class DepartmentsController < ApplicationController
 
 	def new
 		@department =Department.new()
+		# @designation = @department.designation.new()
 	end
 
 
 	def show
     @department = Department.find(params[:id])
+    # @employee = @department.employees
   end
 
   def create
@@ -44,7 +46,14 @@ class DepartmentsController < ApplicationController
     redirect_to departments_path, notice: "Department was successfully deleted"
   end
 
+  # def designation
+  # 	@designation = Designation.new(dept_params)
+  # end
+
   private
+  # def des_params
+  # 	params.require(:designation).permit(:name, )
+  # end
   def dept_params
   	params.require(:department).permit(:name)
   end

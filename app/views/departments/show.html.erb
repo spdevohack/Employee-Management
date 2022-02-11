@@ -1,0 +1,37 @@
+<% if @department.employees.present?%> 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S No.</th>
+      <th scope="col">Employee Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Active</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <% @count = 0 %>
+    	<% (@department.employees).each do |deptemployee|%>
+       <% @count = @count +1 %>
+        <tr>
+          <th scope="row"><%= @count%></th>
+          <td><%= deptemployee.first_name%></td>
+          <td><%= deptemployee.designation%></td>
+          <td><%= deptemployee.active%></td>
+        </tr>
+      <% end%>
+  </tbody>
+</table>
+<%else%>
+    <div class="bg-secondary" style="padding:120px">
+      <p class="text-center size-2" style= "font-size: 2rem; ">Currently, This Department Does not have any employee</p> 
+    </div>  
+<% end %>   
+
+
+<div class="d-flex justify-content-center ">
+  
+  <%= button_to 'Back', departments_path, method: :get, class:'btn btn-success m-5' %>     
+  <%= button_to 'Add Position', "#{department_designation_path}?department_id=#{ @department.id }", method: :get, class:'btn btn-dark m-5' %></span>
+  <%= button_to 'Show Positions', designation_path, method: :get, class:'btn btn-dark m-5' %></span>
+</div>

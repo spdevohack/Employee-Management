@@ -20,7 +20,8 @@
           <td><%= department.employees.where(designation:"manager", active: true).pluck("first_name")%></td>
           <td><%= department.employees.count%></td>
           <td class="d-flex">
-            <%= button_to 'Edit', edit_department_path(department), method: :get, class:'btn btn-success' %>
+            <%= button_to 'Show', department_path(department), method: :get, class:'btn btn-dark' %>
+          	<%= button_to 'Edit', edit_department_path(department), method: :get, class:'btn btn-success' %>
             <%= button_to 'Delete', department_path(department), method: :delete, class:'btn btn-primary', id:"delete-btn" %>
           </td>
         </tr>
@@ -30,11 +31,17 @@
 <%= link_to 'Add Department', new_department_path, class: 'btn btn-primary'%>
 
 <script>
-  button = document.getElementById("delete-btn");
-  button.addEventListener('click', function(e) {
-    if(confirm('Are you Sure?')){
-    }else {
-      e.preventDefault();
-    }
-  })
+  button = document.querySelectorAll("#delete-btn");
+	for (var i = 0; i<= button.length; i++){
+	    button[i].addEventListener('click', function(e) {
+	      if(confirm('Are you Sure?')){
+	      }else {
+	        e.preventDefault();
+	      }
+	    })
+	  }
 </script>
+
+
+
+<!-- "#{ new_designation_path}?department_id=#{ @department.id }" -->

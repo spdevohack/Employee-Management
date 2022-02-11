@@ -21,16 +21,14 @@
     	<%= form.radio_button :gender, "Other" %>
     	<%= form.label :gender_other, "Other" %>
     	<br>
-    	<%= form.label :designation %>
-    	<%= form.select :designation, ['manager','team_leader','team_member', 'staff'], {prompt: "Select Designation"}%><br>
       <%= form.label :department_id%>
       <%= form.select :department_id, Department.all.collect{|d| [d.name, d.id]}, {prompt: "Select Department"}%><br>
+    	<%= form.label :designation %>
+    	<%= form.select :designation, ['manager','team_leader','team_member', 'staff'], {prompt: "Select Designation"}%><br>
       <%= form.label :email, "Email:" %><br>
       <%= form.text_field :email , class:'form-control input'%><br>
-    
     	  <%= form.label :password, "Password:" %><br>
         <%= form.password_field :password , class:'form-control input'%><br>
-     
       <input id="submitbtn" type="button" value="Save"  ></input>  
     <% end %>
 

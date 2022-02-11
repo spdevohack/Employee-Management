@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S No.</th>
+      <th scope="col">Position</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @count = 0 %>
+    	<% (@designation).each do |designation|%>
+       <% @count = @count +1 %>
+        <tr>
+          <th scope="row"><%= @count%></th>
+          <td><%= designation.name%></td>
+          <td class="d-flex">
+            <%= button_to 'Edit', designation_path(designation), method: :get, class:'btn btn-success' %>     
+            <%= button_to 'Delete', designation_path(designation), method: :delete, class:'btn btn-success' %>     
+
+          </td>
+        </tr>
+      <% end%>
+  </tbody>
+</table>
+<%= button_to 'Back', department_path(@department), method: :get, class:'btn btn-success' %>  
