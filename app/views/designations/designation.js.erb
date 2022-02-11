@@ -1,0 +1,15 @@
+var designation = document.querySelector("#employee_designation_id")
+while (designation.firstChild) designation.removeChild(designation.firstChild);
+
+// Add a placeholder
+var placeholder = document.createElement("option");
+placeholder.text = "Select Position";
+placeholder.value = "";
+designation.appendChild(placeholder);
+
+
+<% #debugger %>
+// Use erb templating to add the designations
+<% @designations.each do |s| %>
+  designation.options[designation.options.length] = new Option('<%= s.name %>', '<%= s.id %>')
+<% end %>

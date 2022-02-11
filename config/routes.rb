@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :departments
   resources :projects
   resources :designations
+
+  get 'designation', to: 'designations#designation'
   get "designations/:id/new" => "designations#new", :as => "department_designation"
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_11_062729) do
+ActiveRecord::Schema.define(version: 2022_02_11_121333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,9 @@ ActiveRecord::Schema.define(version: 2022_02_11_062729) do
     t.datetime "confirmed_at", precision: 6
     t.datetime "confirmation_sent_at", precision: 6
     t.string "unconfirmed_email"
+    t.bigint "designation_id"
     t.index ["department_id"], name: "index_employees_on_department_id"
+    t.index ["designation_id"], name: "index_employees_on_designation_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end

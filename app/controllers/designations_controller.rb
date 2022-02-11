@@ -44,6 +44,11 @@ class DesignationsController < ApplicationController
   	end
   end
 
+  def designation
+  	# debugger
+  	@designations = Department.find(params[:department]).designations
+  end
+
   private
   def des_params
   	params.require(:designation).permit(:name, :department_id )
