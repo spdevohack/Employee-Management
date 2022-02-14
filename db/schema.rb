@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_11_121333) do
+ActiveRecord::Schema.define(version: 2022_02_14_074552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 2022_02_11_121333) do
     t.string "gender"
     t.string "phone"
     t.text "address"
-    t.integer "designation"
     t.boolean "active", default: true
     t.boolean "is_admin", default: false
     t.string "email", default: "", null: false
@@ -71,12 +70,16 @@ ActiveRecord::Schema.define(version: 2022_02_11_121333) do
     t.datetime "last_sign_in_at", precision: 6
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.integer "attendance"
     t.string "confirmation_token"
     t.datetime "confirmed_at", precision: 6
     t.datetime "confirmation_sent_at", precision: 6
     t.string "unconfirmed_email"
     t.bigint "designation_id"
+    t.string "appearance"
+    t.integer "attendance_count"
+    t.date "attendance_date"
+    t.integer "designation"
+    t.integer "attendance"
     t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["designation_id"], name: "index_employees_on_designation_id"
     t.index ["email"], name: "index_employees_on_email", unique: true

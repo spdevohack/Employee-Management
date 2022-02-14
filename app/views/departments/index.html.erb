@@ -4,7 +4,6 @@
       <th scope="col">S No.</th>
       <th scope="col">Department ID</th>
       <th scope="col">Department Name</th>
-      <th scope="col">Department Manager</th>
       <th scope="col">No. of Employees</th>
       <th scope="col">Action</th>
     </tr>
@@ -17,7 +16,6 @@
           <th scope="row"><%= @count%></th>
           <td><%= department.id %></td>
           <td><%= department.name%></td>
-          <td><%= department.employees.where(designation:"manager", active: true).pluck("first_name")%></td>
           <td><%= department.employees.count%></td>
           <td class="d-flex">
             <%= button_to 'Show', department_path(department), method: :get, class:'btn btn-dark' %>

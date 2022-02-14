@@ -40,9 +40,11 @@
         </li>
       <% end %>   
       </ul>
+  <% if employee_signed_in? && current_employee.is_admin == true && @action == "index" %>
     <%= form_with url: employees_path, method: :get do |form| %>
         <%= form.text_field :search %>
         <%= form.submit "Search" %>
     <% end %>
+  <% end %>  
   </div>
 </nav>

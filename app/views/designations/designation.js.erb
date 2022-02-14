@@ -8,7 +8,7 @@ placeholder.value = "";
 designation.appendChild(placeholder);
 
 
-<% #debugger %>
+
 // Use erb templating to add the designations
 <% @designations.each do |s| %>
   designation.options[designation.options.length] = new Option('<%= s.name %>', '<%= s.id %>')

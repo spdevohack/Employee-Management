@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # get 'departments/designation' => "departments#designation"
   root "organizations#index"
-  post 'checkin', to: 'attandences#checkin'
+  # post 'checkin', to: 'attandences#checkin'
   resources :employees
   resources :departments
   resources :projects
@@ -23,5 +23,8 @@ Rails.application.routes.draw do
 
   get 'designation', to: 'designations#designation'
   get "designations/:id/new" => "designations#new", :as => "department_designation"
+  # post 'checkin' => 'employees#checkin'
+  get 'employees/checkin/:id', to: 'employees#checkin', as: "checkin"
+
 
 end

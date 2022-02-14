@@ -14,7 +14,7 @@
           <th scope="row"><%= @count%></th>
           <td><%= designation.name%></td>
           <td class="d-flex">
-            <%= button_to 'Edit', designation_path(designation), method: :get, class:'btn btn-success' %>     
+            <%= button_to 'Edit', edit_designation_path(designation), method: :get, class:'btn btn-success' %>     
             <%= button_to 'Delete', designation_path(designation), method: :delete, class:'btn btn-success' %>     
 
           </td>

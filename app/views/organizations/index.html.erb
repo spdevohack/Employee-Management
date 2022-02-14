@@ -1,7 +1,7 @@
 <h1>DevoHack</h1>
 
-<input type="button", value="Check In", id = "checkin">
-<input type="button", value="Check Out", id = "checkout">
+
+<!-- <input type="button", value="Check Out", id = "checkout"> -->
 
 
-<%= javascript_include_tag "checkin" %>
+<%= link_to "Check In", checkin_path(current_employee.id), class:"btn btn-info" %>

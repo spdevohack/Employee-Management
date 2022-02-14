@@ -12,16 +12,13 @@
   var regTitle = /^[a-zA-Z0-9\s]{5,}$/
   var inputArray = document.querySelector(".input");
   var form  =document.getElementById("my-form");
-  // var alertArray = ["Title must be greater than 5 words", "Description must be greater than 20 words"];  
-  // var blankError = ["title must be present", "Description must be present"]
-  // var array = [];
   var submitBtn = document.querySelector("#submitbtn");
   submitBtn.addEventListener("click", validation);
   function validation(e) {
           if (!regTitle.test(inputArray.value) && inputArray.value != "") {
-             alert("Enter Project Title of word more than 5")
+             alert("Enter Department Name of word more than 5 And of correct Format ")
           } else if (inputArray.value == "") {
-             alert("Enter proejct title")
+             alert("Enter Department Name")
           }else{
           	form.submit()
           }        

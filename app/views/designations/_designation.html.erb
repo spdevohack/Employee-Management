@@ -2,7 +2,25 @@
     <%= form_with  id:"my-form", model: @designation, url: @action == 'edit' ? designation_path : designations_path, method: @action == 'edit' ? :PATCH : :POST do |form| %>
       <%= form.label :name,  "Designation Name:" %><br>
       <%= form.text_field :name, class:'form-control input'%><br>
-      <%=form.text_field :department_id , value: @department.id, type:'hidden' %>
-      <input id="submitbtn" type="submit"  name= 'Add' ></input>  
+      <%= form.text_field :department_id , value: @department.id, type:'hidden' %>
+      <input id="submitbtn" type="button" value="Save" name= 'Add' ></input>  
     <% end %>
 </div>
+
+
+<script type="text/javascript">
+  var regTitle = /^[a-zA-Z0-9\s]{5,}$/
+  var inputArray = document.querySelector(".input");
+  var form  =document.getElementById("my-form");
+  var submitBtn = document.querySelector("#submitbtn");
+  submitBtn.addEventListener("click", validation);
+  function validation(e) {
+          if (!regTitle.test(inputArray.value) && inputArray.value != "") {
+             alert("Enter Designation of more than 5 Word  or in correct format")
+          } else if (inputArray.value == "") {
+             alert("Enter Designation")
+          }else{
+            form.submit()
+          }        
+    }
+</script>

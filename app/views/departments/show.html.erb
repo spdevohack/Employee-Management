@@ -16,7 +16,7 @@
         <tr>
           <th scope="row"><%= @count%></th>
           <td><%= deptemployee.first_name%></td>
-          <td><%= deptemployee.designation%></td>
+          <td><%= deptemployee.designation.name  if deptemployee.designation.present? %></td>
           <td><%= deptemployee.active%></td>
         </tr>
       <% end%>

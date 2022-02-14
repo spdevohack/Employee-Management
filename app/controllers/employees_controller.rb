@@ -1,7 +1,9 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_employee!, only: [:index]
 	def index 
-		@employees = Employee.search(params[:search])
+
+		  @employees = Employee.search(params[:search])
+      @action = "index"
 	end
 
 	def new
@@ -53,14 +55,25 @@ class EmployeesController < ApplicationController
   end
 
 
-  def signin
-    if sign_in(@employee)
-      current_employee.update(attendance: 'present')
-    end
+  # def signin
+  #   if sign_in(@employee)
+  #     current_employee.update(attendance: 'present')
+  #   end
+  # end
+
+  def checkin
+    @employee = Employee.find(params[:id])
+    debugger
+    if (@employee.attendance_date == Date.today) and ((@employee.appearance == nil) or (@employee.appearance == "Absent"))
+      @employee.update(appearance: "Present", attendance_count:  + 1)
+      redirect_to root_path, notice: "Checked In"
+    else 
+      redirect_to root_path, notice: "You Already Checked In" 
+    end  
   end
 
   private
   def employee_params
-  	params.require(:employee).permit(:first_name, :last_name, :email, :phone, :address, :salary, :gender, :join_date, :password, :designation, :active, :department_id, :file)
+  	params.require(:employee).permit(:first_name, :last_name, :email, :phone, :address, :salary, :gender, :join_date, :password, :designation_id, :active, :department_id, :file, :appearance, :available, :attendance_count)
   end
 end

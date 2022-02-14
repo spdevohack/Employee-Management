@@ -1,6 +1,6 @@
 class Department < ApplicationRecord
-	has_many :employees
-	has_many :designations
+	has_many :employees, dependent: :destroy
+	has_many :designations, dependent: :destroy
 	# def self.search(search)
  #    if search
  #      where("name iLIKE ?", "%#{search}%").order("name")

@@ -26,13 +26,16 @@ class DesignationsController < ApplicationController
 
   def edit
   	@action = 'edit'
-    @designation = Department.find(params[:id])
+    @designation = Designation.find(params[:id])
+    @department = @designation.department
+
+    debugger
   end
 
    def update
     @designation = Designation.find(params[:id])
     if @designation.update(des_params)
-      redirect_to designations_path, notice: "New Designation successfully Introduced"
+      redirect_to designation_path(@designation.department.id), notice: "New Designation successfully Introduced"
     else
       render 'edit'
     end
@@ -40,8 +43,9 @@ class DesignationsController < ApplicationController
 
   def destroy
   	@designation = Designation.find(params[:id])
-  	if @designation.destroy
-  	end
+  	@designation.destroy
+    redirect_to designation_path, notice: "Designation Removed"
+  	
   end
 
   def designation

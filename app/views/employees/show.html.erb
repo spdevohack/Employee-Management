@@ -14,7 +14,8 @@
 			<strong>Currently Handle Project:</strong> <%= @employee.projects.pluck(:title) if @employee.projects.present? %><br>
 		<% end %>
 		<strong>Confirmed At:</strong><%= @employee.confirmed_at.strftime("%a %b %e %Y %T") if @employee.confirmed_at.present?%><br>
-
+		<strong>Attendance: </strong><%= @employee.appearance %><br>
+    <strong>Attendance Count: </strong><%= @employee.attendance_count %><br>
 		<strong>Current Sign At</strong> <%= @employee.current_sign_in_at.localtime if @employee.current_sign_in_at.present? %><br>
 		<strong>Last Sign At:</strong> <%= @employee.last_sign_in_at.localtime if @employee.current_sign_in_at.present?%><br>
 		<strong>Sign In Count:</strong> <%= @employee.sign_in_count%><br><br>
@@ -28,9 +29,7 @@
 
 
 
- 
+<%= javascript_include_tag "checkin" %>
 
-<!-- <strong>Attendance:</strong><%= @employee.attendance if @employee.attendance.present? %><br> -->
-<!-- <strong>Unconfirmed Employee</strong><%= @employee.unconfirmed_email %><br> -->
 
 
