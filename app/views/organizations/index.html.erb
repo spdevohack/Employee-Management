@@ -5,7 +5,7 @@
 
 <% if current_employee.appearance == "Present" %>
  <%= link_to "Check Out", checkout_path(current_employee.id), class:"btn btn-info" %>
-<% elsif current_employee.appearance == "Checkout" %>
+<% elsif current_employee.appearance == "Checkout" or current_employee.appearance == nil %>
  <%= link_to "Check In", checkin_path(current_employee.id), class:"btn btn-info" %>
 <% end %>	
 

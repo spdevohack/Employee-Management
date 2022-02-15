@@ -19,6 +19,7 @@ class EmployeesController < ApplicationController
 
   def create
     @employee = Employee.new(employee_params) #link every employee with user 
+    @employee.skip_confirmation!
     if @employee.save!
       redirect_to employees_path, notice: "#{@employee.first_name} successfully Added"
       # skip_confirmation! 
@@ -35,13 +36,15 @@ class EmployeesController < ApplicationController
 
   def update
     @employee = Employee.find(params[:id])
+    @employee.skip_confirmation!
+    
     if @employee.is_admin?
       @employee.update!(employee_params)
-      sign_in(@employee, :bypass => true)
+      # sign_in(@employee, :bypass => true)
       redirect_to employees_path, notice: "Employee Details successfully updated"
     elsif  @employee.is_admin == false 
       @employee.update!(employee_params)
-      sign_in(@employee, :bypass => true)
+      # sign_in(@employee, :bypass => true)
       redirect_to employee_path, notice: "Profile successfully updated"
     else
       render "edit"
@@ -55,20 +58,14 @@ class EmployeesController < ApplicationController
     end
   end
 
-
-  # def signin
-  #   if sign_in(@employee)
-  #     current_employee.update(attendance: 'present')
-  #   end
-  # end
-
   def checkin
     @employee = Employee.find(params[:id])
-    # debugger
     if (@employee.attendance_date != Date.today) and ((@employee.appearance == nil) or (@employee.appearance == "Checkout"))
       debugger
-      @attendance = @employee.attendance_count
-      @employee.update(appearance: "Present", attendance_count:  "#{@attendance + 1}", attendance_date: Date.today)
+      @attendance = @employee.attendance_count == nil ? "#{@employee.attendance_count = 0}" : "#{@employee.attendance_count}"
+      @att = @attendance.to_i
+
+      @employee.update(appearance: "Present", attendance_count:  "#{@att + 1}", attendance_date: Date.today)
       redirect_to root_path, notice: "Checked In"
     else 
       redirect_to root_path, notice: "You Already Checked In 1 Time" 
