@@ -4,6 +4,7 @@ class EmployeesController < ApplicationController
 
 		  @employees = Employee.search(params[:search])
       @action = "index"
+      # debugger
 	end
 
 	def new
@@ -64,12 +65,13 @@ class EmployeesController < ApplicationController
   def checkin
     @employee = Employee.find(params[:id])
     # debugger
-    if (@employee.attendance_date == Date.today) or ((@employee.appearance == nil) or (@employee.appearance == "Checkout"))
-      # debugger
-      @employee.update(appearance: "Present", attendance_count:  + 1)
+    if (@employee.attendance_date != Date.today) and ((@employee.appearance == nil) or (@employee.appearance == "Checkout"))
+      debugger
+      @attendance = @employee.attendance_count
+      @employee.update(appearance: "Present", attendance_count:  "#{@attendance + 1}", attendance_date: Date.today)
       redirect_to root_path, notice: "Checked In"
     else 
-      redirect_to root_path, notice: "You Already Checked In" 
+      redirect_to root_path, notice: "You Already Checked In 1 Time" 
     end  
   end
 
