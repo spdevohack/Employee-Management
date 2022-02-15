@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get "designations/:id/new" => "designations#new", :as => "department_designation"
   # post 'checkin' => 'employees#checkin'
   get 'employees/checkin/:id', to: 'employees#checkin', as: "checkin"
+  get 'employees/checkout/:id', to: 'employees#checkout', as: "checkout"
+
 
 
 end

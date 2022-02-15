@@ -63,14 +63,28 @@ class EmployeesController < ApplicationController
 
   def checkin
     @employee = Employee.find(params[:id])
-    debugger
-    if (@employee.attendance_date == Date.today) and ((@employee.appearance == nil) or (@employee.appearance == "Absent"))
+    # debugger
+    if (@employee.attendance_date == Date.today) or ((@employee.appearance == nil) or (@employee.appearance == "Checkout"))
+      # debugger
       @employee.update(appearance: "Present", attendance_count:  + 1)
       redirect_to root_path, notice: "Checked In"
     else 
       redirect_to root_path, notice: "You Already Checked In" 
     end  
   end
+
+
+
+ def checkout
+    @employee = Employee.find(params[:id])
+    # debugger
+    if  (@employee.appearance == "Present") 
+      # debugger
+      @employee.update(appearance: "Checkout")
+      redirect_to root_path, notice: "Checked out"
+    end  
+  end
+
 
   private
   def employee_params
