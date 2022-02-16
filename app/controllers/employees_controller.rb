@@ -61,7 +61,7 @@ class EmployeesController < ApplicationController
   def checkin
     @employee = Employee.find(params[:id])
     if (@employee.attendance_date != Date.today) and ((@employee.appearance == nil) or (@employee.appearance == "Checkout"))
-      debugger
+      # debugger
       @attendance = @employee.attendance_count == nil ? "#{@employee.attendance_count = 0}" : "#{@employee.attendance_count}"
       @att = @attendance.to_i
 
